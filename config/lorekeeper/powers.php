@@ -67,4 +67,10 @@ return [
         'name'        => 'Comment on Sales',
         'description' => 'Allow rank to comment on sales in preview mode.',
     ],
+    'manage_affiliates' => [
+        'name' => 'Manage Affiliates',
+        'description' => 'Allow rank to view affiliate request queue, manage them, or even create new affiliates.'
+    ],
+
+
 ];

@@ -172,3 +172,14 @@ Route::group(['prefix' => 'gallery'], function () {
 Route::group(['prefix' => 'reports', 'namespace' => 'Users'], function () {
     Route::get('/bug-reports', 'ReportController@getBugIndex');
 });
+
+/**************************************************************************************************
+    Affiliates
+**************************************************************************************************/
+Route::group(['prefix' => 'affiliates'], function() {
+    Route::get('/', 'AffiliateController@getIndex')->name('affiliates');
+    Route::get('apply', 'AffiliateController@getApply')->name('apply_affiliate');
+    Route::get('status/{slug}', 'AffiliateController@getStatus')->name('affiliate_status');
+    Route::post('apply', 'AffiliateController@postApply')->name('post_apply_affiliate');
+});
+

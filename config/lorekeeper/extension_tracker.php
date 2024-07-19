@@ -20,6 +20,14 @@ return [
         ]),
         'version' => '1.0.1',
     ],
+    'affiliates' => [
+        'key' => 'affiliates',
+        'wiki_key' => 'Affiliates',
+        'creators' => json_encode([
+            'Uri' => 'https://github.com/preimpression/',
+        ]),
+        'version' => '1.1.0',
+    ],
 
 
 ];

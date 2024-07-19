@@ -178,6 +178,26 @@
                     </div>
                 </div>
             @endif
+            @if (Auth::user()->hasPower('manage_affiliates'))
+        <div class="col-sm-6">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Affiliate Requests @if($affiliateCount)<span class="badge badge-primary">{{ $affiliateCount }}</span>@endif</h5>
+                    <p class="card-text">
+                        @if($affiliateCount)
+                            {{ $affiliateCount }} affiliate request{{ $affiliateCount == 1 ? '' : 's' }} awaiting processing.
+                        @else
+                            The affiliate request queue is clear. Hooray!
+                        @endif
+                    </p>
+                    <div class="text-right">
+                        <a href="{{ url('admin/affiliates/pending') }}" class="card-link">View Queue <span class="fas fa-caret-right ml-1"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
             @if ($galleryCurrencyAwards)
                 <div class="col-sm-6">
                     <div class="card mb-3">

@@ -157,4 +157,10 @@ class Notification extends Model {
     public const GALLERY_SUBMISSION_STAFF_COMMENTS = 513;
     public const GALLERY_SUBMISSION_EDITED = 514;
     public const GALLERY_SUBMISSION_PARTICIPANT = 515;
+   
+   
+    const AFFILIATE_ACCEPTION               = 105; // URI - Affiliates
+    const AFFILIATE_REJECTION               = 106; // URI - Affiliates
+    const AFFILIATE_PENDING                 = 107; // URI - Affiliates
+
 }
