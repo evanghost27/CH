@@ -745,64 +745,6 @@ class CharacterController extends Controller {
         return redirect()->back();
     }
 
-    /**
-     * Transfers inventory items back to a user.
-     *
-     * @param App\Services\InventoryManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    private function postItemTransfer(Request $request, InventoryManager $service) {
-        if ($service->transferCharacterStack($this->character, $this->character->user, CharacterItem::find($request->get('ids')), $request->get('quantities'), Auth::user())) {
-            flash('Item transferred successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
-
-    /**
-     * Names an inventory stack.
-     *
-     * @param App\Services\CharacterManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    private function postName(Request $request, InventoryManager $service) {
-        $request->validate([
-            'stack_name' => 'nullable|max:100',
-        ]);
-
-        if ($service->nameStack($this->character, CharacterItem::find($request->get('ids')), $request->get('stack_name'), Auth::user())) {
-            flash('Item named successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
-
-    /**
-     * Deletes an inventory stack.
-     *
-     * @param App\Services\CharacterManager $service
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    private function postDelete(Request $request, InventoryManager $service) {
-        if ($service->deleteStack($this->character, CharacterItem::find($request->get('ids')), $request->get('quantities'), Auth::user())) {
-            flash('Item deleted successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                flash($error)->error();
-            }
-        }
-
-        return redirect()->back();
-    }
+   
+   
 }
