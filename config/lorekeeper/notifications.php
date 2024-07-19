@@ -504,4 +504,11 @@ return [
         'message' => '<a href="{sender_url}">{sender}</a> has added you as a participant on a gallery submission. (<a href="{url}">View Submission</a>)',
         'url'     => 'gallery/view/{submission_id}',
     ],
+
+        // BIRTHDAY_REWARDED
+        1105 => [
+            'name' => 'Happy Birthday to You',
+            'message' => 'It\'s your birthday this month, {user_name}! A gift has been left in your inventory. (<a href="{url}">View Inventory</a>)',
+            'url' => 'inventory'
+        ],
 ];

@@ -169,4 +169,5 @@ class Notification extends Model {
     const FORCED_AWARD_TRANSFER             = 344;
     const CHARACTER_AWARD_GRANT             = 345;
     const CHARACTER_AWARD_REMOVAL           = 346;
+    const BIRTHDAY_REWARDED    = 1105;
 }
