@@ -163,4 +163,10 @@ class Notification extends Model {
     const AFFILIATE_REJECTION               = 106; // URI - Affiliates
     const AFFILIATE_PENDING                 = 107; // URI - Affiliates
 
+       const AWARD_GRANT                       = 341;
+    const AWARD_REMOVAL                     = 342;
+    const AWARD_TRANSFER                    = 343;
+    const FORCED_AWARD_TRANSFER             = 344;
+    const CHARACTER_AWARD_GRANT             = 345;
+    const CHARACTER_AWARD_REMOVAL           = 346;
 }

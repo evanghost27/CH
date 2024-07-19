@@ -4,7 +4,8 @@
         <i class="far fa-clock"></i> {!! format_date(Carbon\Carbon::now()) !!}
     </div>
 </div>
-<div class="row">
+
+<div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card mb-4">
             <div class="card-body text-center">
@@ -31,8 +32,6 @@
             </ul>
         </div>
     </div>
-</div>
-<div class="row">
     <div class="col-md-6">
         <div class="card mb-4">
             <div class="card-body text-center">
@@ -54,6 +53,18 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><a href="{{ url('bank') }}">Bank</a></li>
                 <li class="list-group-item"><a href="{{ Auth::user()->url . '/currency-logs' }}">Currency Logs</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-12">
+            <div class="card-body text-center">
+                <img src="{{ asset('images/awards.png') }}" />
+                <h5 class="card-title">{{ ucfirst(__('awards.awards')) }}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><a href="{{ url(__('awards.awardcase')) }}">My {{ ucfirst(__('awards.awards')) }}</a></li>
+                <li class="list-group-item"><a href="{{ Auth::user()->url . '/'.__('awards.award').'-logs' }}">{{ ucfirst(__('awards.award')) }} Logs</a></li>
             </ul>
         </div>
     </div>

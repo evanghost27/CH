@@ -14,6 +14,8 @@ use App\Models\Species\Subtype;
 use App\Models\Trade;
 use App\Models\User\User;
 use App\Models\User\UserItem;
+
+use App\Services\AwardCaseManager;
 use App\Services\CharacterManager;
 use App\Services\TradeManager;
 use Illuminate\Http\Request;

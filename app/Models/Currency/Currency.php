@@ -123,6 +123,17 @@ class Currency extends Model {
     }
 
     /**
+     * Gets the URL of the model's image.
+     *
+     * @return string
+     */
+    public function getImageUrlAttribute()
+    {
+        if (!$this->has_image) return null;
+        return asset($this->imageDirectory . '/' . $this->currencyImageFileName);
+    }
+
+    /**
      * Gets the URL of the model's icon image.
      *
      * @return string

@@ -6,6 +6,10 @@ use App\Models\Item\Item;
 use App\Services\InventoryManager;
 use App\Services\Service;
 use Illuminate\Support\Facades\DB;
+use App\Models\Currency\Currency;
+use App\Models\Award\Award;
+use App\Models\Loot\LootTable;
+use App\Models\Raffle\Raffle;
 
 class BoxService extends Service {
     /*
@@ -22,8 +26,16 @@ class BoxService extends Service {
      *
      * @return array
      */
-    public function getEditData() {
-        return [];
+    public function getEditData()
+    {
+        return [
+            'characterCurrencies' => Currency::where('is_character_owned', 1)->orderBy('sort_character', 'DESC')->pluck('name', 'id'),
+            'items' => Item::orderBy('name')->pluck('name', 'id'),
+            'currencies' => Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id'),
+            'awards' => Award::orderBy('name')->pluck('name', 'id'),
+            'tables' => LootTable::orderBy('name')->pluck('name', 'id'),
+            'raffles' => Raffle::where('rolled_at', null)->where('is_active', 1)->orderBy('name')->pluck('name', 'id'),
+        ];
     }
 
     /**
@@ -79,6 +91,9 @@ class BoxService extends Service {
                         break;
                     case 'Currency':
                         $type = 'App\Models\Currency\Currency';
+                        break;
+                    case 'Award':
+                        $type = 'App\Models\Award\Award';
                         break;
                     case 'LootTable':
                         $type = 'App\Models\Loot\LootTable';

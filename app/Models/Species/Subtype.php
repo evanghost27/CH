@@ -21,6 +21,32 @@ class Subtype extends Model {
      */
     protected $table = 'subtypes';
 
+
+    /**
+     * Validation rules for creation.
+     *
+     * @var array
+     */
+    public static $createRules = [
+        'species_id' => 'required',
+        'name' => 'required|between:3,100',
+        'description' => 'nullable',
+        'image' => 'mimes:png',
+    ];
+
+
+    /**
+     * Validation rules for updating.
+     *
+     * @var array
+     */
+    public static $updateRules = [
+        'species_id' => 'required',
+        'name' => 'required|between:3,100',
+        'description' => 'nullable',
+        'image' => 'mimes:png',
+    ];
+
     /**
      * Accessors to append to the model.
      *

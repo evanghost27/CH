@@ -30,7 +30,7 @@
             </div>
             @if (!$image->character->is_myo_slot && !$image->is_valid)
                 <div class="alert alert-danger">
-                    This version of this character is outdated, and only noted here for recordkeeping purposes. Do not use as an official reference.
+                    This version of this {{ __('lorekeeper.character') }} is outdated, and only noted here for recordkeeping purposes. Do not use as an official reference.
                 </div>
             @endif
 
