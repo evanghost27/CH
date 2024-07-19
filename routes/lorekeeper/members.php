@@ -225,3 +225,12 @@ Route::group(['prefix' => 'comments', 'namespace' => 'Comments'], function () {
     Route::post('/{id}/like/{action}', 'CommentController@like')->name('comments.like');
     Route::get('/liked', 'CommentController@getLikedComments');
 });
+
+/**************************************************************************************************
+    Advent Calendars
+**************************************************************************************************/
+
+Route::group(['prefix' => 'advent-calendars'], function() {
+    Route::get('{id}', 'AdventController@getAdvent');
+    Route::post('{id}', 'AdventController@postClaimPrize');
+});
