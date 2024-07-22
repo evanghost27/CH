@@ -2,20 +2,17 @@
 
 namespace App\Models\Advent;
 
-use Config;
-use DB;
-use Carbon\Carbon;
 use App\Models\Model;
+use Carbon\Carbon;
 
-class AdventParticipant extends Model
-{
+class AdventParticipant extends Model {
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'advent_id', 'user_id', 'day', 'claimed_at'
+        'advent_id', 'user_id', 'day', 'claimed_at',
     ];
 
     /**
@@ -47,16 +44,14 @@ class AdventParticipant extends Model
     /**
      * Get the participating user.
      */
-    public function user()
-    {
+    public function user() {
         return $this->belongsTo('App\Models\User\User', 'user_id');
     }
 
     /**
      * Get the advent calendar being participated in.
      */
-    public function advent()
-    {
+    public function advent() {
         return $this->belongsTo('App\Models\Advent\AdventCalendar', 'advent_id');
     }
 
@@ -71,9 +66,7 @@ class AdventParticipant extends Model
      *
      * @return string
      */
-    public function getItemDataAttribute()
-    {
+    public function getItemDataAttribute() {
         return 'Claimed from '.$this->advent->displayLink.' day '.$this->day.' by '.$this->user->displayName.'.';
     }
-
 }

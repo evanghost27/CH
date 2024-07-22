@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Award\Award;
+use App\Models\Award\AwardCategory;
 use App\Models\Character\Character;
 use App\Models\Character\CharacterImage;
 use App\Models\Character\Sublist;
@@ -19,15 +21,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Route;
-use App\Models\Item\ItemLog;
-
-use App\Models\User\UserAward;
-use App\Models\Award\Award;
-use App\Models\Award\AwardCategory;
-use App\Models\Award\AwardLog;
-
-use App\Models\Gallery\GalleryFavorite;
-
 
 class UserController extends Controller {
     /*
@@ -82,8 +75,8 @@ class UserController extends Controller {
             'user'       => $this->user,
             'name'       => $name,
             'items'      => $this->user->items()->where('count', '>', 0)->orderBy('user_items.updated_at', 'DESC')->take(4)->get(),
-             'awards' => $this->user->awards()->orderBy('user_awards.updated_at', 'DESC')->whereNull('deleted_at')->where('count','>',0)->take(4)->get(),
-            'sublists' => Sublist::orderBy('sort', 'DESC')->get(),
+            'awards'     => $this->user->awards()->orderBy('user_awards.updated_at', 'DESC')->whereNull('deleted_at')->where('count', '>', 0)->take(4)->get(),
+            'sublists'   => Sublist::orderBy('sort', 'DESC')->get(),
             'characters' => $characters,
             'aliases'    => $aliases->orderBy('is_primary_alias', 'DESC')->orderBy('site')->get(),
         ]);
@@ -238,11 +231,11 @@ class UserController extends Controller {
     /**
      * Shows a user's awardcase.
      *
-     * @param  string  $name
+     * @param string $name
+     *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getUserAwardCase($name)
-    {
+    public function getUserAwardCase($name) {
         $categories = AwardCategory::orderBy('sort', 'DESC')->get();
         $awards = count($categories) ?
             $this->user->awards()
@@ -258,19 +251,22 @@ class UserController extends Controller {
                 ->orderBy('updated_at')
                 ->get()
                 ->groupBy(['award_category_id', 'id']);
+
         return view('user.awardcase', [
-            'user' => $this->user,
-            'categories' => $categories->keyBy('id'),
-            'awards' => $awards,
+            'user'        => $this->user,
+            'categories'  => $categories->keyBy('id'),
+            'awards'      => $awards,
             'userOptions' => User::where('id', '!=', $this->user->id)->orderBy('name')->pluck('name', 'id')->toArray(),
-            'user' => $this->user,
-            'logs' => $this->user->getAwardLogs(),
-            'sublists' => Sublist::orderBy('sort', 'DESC')->get()
+            'user'        => $this->user,
+            'logs'        => $this->user->getAwardLogs(),
+            'sublists'    => Sublist::orderBy('sort', 'DESC')->get(),
         ]);
     }
 
     /**
      * Shows a user's profile.
+     *
+     * @param mixed $name
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -321,15 +317,16 @@ class UserController extends Controller {
     /**
      * Shows a user's award logs.
      *
-     * @param  string  $name
+     * @param string $name
+     *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getUserAwardLogs($name)
-    {
+    public function getUserAwardLogs($name) {
         $user = $this->user;
+
         return view('user.award_logs', [
             'user' => $this->user,
-            'logs' => $this->user->getAwardLogs(0)
+            'logs' => $this->user->getAwardLogs(0),
         ]);
     }
 

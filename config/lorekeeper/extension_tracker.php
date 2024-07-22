@@ -1,4 +1,5 @@
 <?php
+
 return [
 
     // FORMAT EXAMPLE.
@@ -13,7 +14,7 @@ return [
     // ],
 
     'advent_calendars' => [
-        'key' => 'advent_calendars',
+        'key'      => 'advent_calendars',
         'wiki_key' => 'Advent_Calendars',
         'creators' => json_encode([
             'Mercury' => 'https://github.com/itinerare/',
@@ -21,7 +22,7 @@ return [
         'version' => '1.0.1',
     ],
     'affiliates' => [
-        'key' => 'affiliates',
+        'key'      => 'affiliates',
         'wiki_key' => 'Affiliates',
         'creators' => json_encode([
             'Uri' => 'https://github.com/preimpression/',
@@ -30,24 +31,23 @@ return [
     ],
 
     'awards' => [
-        'key' => 'awards',
+        'key'      => 'awards',
         'wiki_key' => 'Awards',
         'creators' => json_encode([
-            'Uri'  => 'https://github.com/preimpression/',
-            'TGI'  => 'https://github.com/tjgallaha/',
+            'Uri'   => 'https://github.com/preimpression/',
+            'TGI'   => 'https://github.com/tjgallaha/',
             'Ne-wt' => 'https://github.com/ne-wt/',
         ]),
         'version' => '2.0.0',
     ],
 
-    
     'Birthday_Rewards' => [
-        'key' => 'Birthday_Rewards',
-            'wiki_key' => 'Birthday_Rewards',
-            'creators' => json_encode([
-                'CH3RVB' => 'https://github.com/CH3RVB/',
-                'Moif' => 'https://github.com/AW0005',
-            ]),
-            'version' => '1.2.0',
-        ],
+        'key'      => 'Birthday_Rewards',
+        'wiki_key' => 'Birthday_Rewards',
+        'creators' => json_encode([
+            'CH3RVB' => 'https://github.com/CH3RVB/',
+            'Moif'   => 'https://github.com/AW0005',
+        ]),
+        'version' => '1.2.0',
+    ],
 ];

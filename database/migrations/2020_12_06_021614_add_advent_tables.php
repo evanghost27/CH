@@ -1,18 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class AddAdventTables extends Migration
-{
+class AddAdventTables extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('advent_calendars', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
@@ -51,11 +47,8 @@ class AddAdventTables extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('advent_calendars');
         Schema::dropIfExists('advent_participants');
     }

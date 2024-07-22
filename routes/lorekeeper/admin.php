@@ -161,7 +161,7 @@ Route::group(['prefix' => 'data', 'namespace' => 'Data', 'middleware' => 'power:
     Route::get('items/tag/{id}', 'ItemController@getAddItemTag');
     Route::post('items/tag/{id}', 'ItemController@postAddItemTag');
 
-    # AWARDS
+    // AWARDS
     Route::get('award-categories', 'AwardController@getIndex');
     Route::get('award-categories/create', 'AwardController@getCreateAwardCategory');
     Route::get('award-categories/edit/{id}', 'AwardController@getEditAwardCategory');
@@ -179,7 +179,7 @@ Route::group(['prefix' => 'data', 'namespace' => 'Data', 'middleware' => 'power:
     Route::post('awards/edit/{id?}', 'AwardController@postCreateEditAward');
     Route::post('awards/delete/{id}', 'AwardController@postDeleteAward');
 
-    # SHOPS
+    // SHOPS
     Route::get('shops', 'ShopController@getIndex');
     Route::get('shops/create', 'ShopController@getCreateShop');
     Route::get('shops/edit/{id}', 'ShopController@getEditShop');
@@ -301,9 +301,8 @@ Route::group(['prefix' => 'sales', 'middleware' => 'power:manage_sales'], functi
     Route::get('character/{slug}', 'SalesController@getCharacterInfo');
 });
 
-
-# AFFILIATES
-Route::group(['prefix' => 'affiliates', 'middleware' => 'power:manage_affiliates'], function() {
+// AFFILIATES
+Route::group(['prefix' => 'affiliates', 'middleware' => 'power:manage_affiliates'], function () {
     Route::get('/', 'AffiliateController@getIndex');
     Route::get('/current', 'AffiliateController@getIndex');
     Route::get('/{status}', 'AffiliateController@getQueue')->where('status', 'pending|accepted|rejected');
@@ -320,8 +319,8 @@ Route::group(['prefix' => 'affiliates', 'middleware' => 'power:manage_affiliates
     Route::post('delete/{id}', 'AffiliateController@postDeleteAffiliate');
 });
 
-# SITE SETTINGS
-Route::group(['prefix' => 'settings', 'middleware' => 'power:edit_site_settings'], function() {
+// SITE SETTINGS
+Route::group(['prefix' => 'settings', 'middleware' => 'power:edit_site_settings'], function () {
     Route::get('/', 'SettingsController@getIndex');
     Route::post('{key}', 'SettingsController@postEditSetting');
 });
@@ -340,8 +339,8 @@ Route::group(['prefix' => 'grants', 'namespace' => 'Users', 'middleware' => 'pow
     Route::post('awards', 'GrantController@postAwards');
 });
 
-# MASTERLIST
-Route::group(['prefix' => 'masterlist', 'namespace' => 'Characters', 'middleware' => 'power:manage_characters'], function() {
+// MASTERLIST
+Route::group(['prefix' => 'masterlist', 'namespace' => 'Characters', 'middleware' => 'power:manage_characters'], function () {
     Route::get('create-character', 'CharacterController@getCreateCharacter');
     Route::post('create-character', 'CharacterController@postCreateCharacter');
 

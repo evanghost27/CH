@@ -2,18 +2,13 @@
 
 namespace App\Models\Award;
 
-use Config;
-use DB;
-use App\Models\Model;
-use App\Models\Award\AwardCategory;
 use App\Models\Character\CharacterAward;
-use App\Models\Shop\Shop;
+use App\Models\Model;
 use App\Models\Prompt\Prompt;
 use App\Models\User\User;
 use App\Models\User\UserAward;
 
-class Award extends Model
-{
+class Award extends Model {
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +17,7 @@ class Award extends Model
     protected $fillable = [
         'award_category_id', 'name', 'has_image', 'description', 'parsed_description',
         'data', 'is_released', 'is_featured', 'is_user_owned', 'is_character_owned',
-        'user_limit', 'character_limit', 'allow_transfer', 'extension', 'allow_reclaim'
+        'user_limit', 'character_limit', 'allow_transfer', 'extension', 'allow_reclaim',
     ];
 
     /**
@@ -38,7 +33,7 @@ class Award extends Model
      * @var array
      */
     protected $casts = [
-        'credits' => 'array'
+        'credits' => 'array',
     ];
 
     /**
@@ -48,12 +43,12 @@ class Award extends Model
      */
     public static $createRules = [
         'award_category_id' => 'nullable',
-        'name' => 'required|unique:awards|between:3,100',
-        'description' => 'nullable',
-        'image' => 'mimes:png,jpeg,jpg,gif',
-        'rarity' => 'nullable',
-        'uses' => 'nullable|between:3,250',
-        'release' => 'nullable|between:3,100'
+        'name'              => 'required|unique:awards|between:3,100',
+        'description'       => 'nullable',
+        'image'             => 'mimes:png,jpeg,jpg,gif',
+        'rarity'            => 'nullable',
+        'uses'              => 'nullable|between:3,250',
+        'release'           => 'nullable|between:3,100',
     ];
 
     /**
@@ -63,11 +58,11 @@ class Award extends Model
      */
     public static $updateRules = [
         'award_category_id' => 'nullable',
-        'name' => 'required|between:3,100',
-        'description' => 'nullable',
-        'image' => 'mimes:png,jpeg,jpg,gif',
-        'uses' => 'nullable|between:3,250',
-        'release' => 'nullable|between:3,100'
+        'name'              => 'required|between:3,100',
+        'description'       => 'nullable',
+        'image'             => 'mimes:png,jpeg,jpg,gif',
+        'uses'              => 'nullable|between:3,250',
+        'release'           => 'nullable|between:3,100',
     ];
 
     /**********************************************************************************************
@@ -79,24 +74,21 @@ class Award extends Model
     /**
      * Get the category the award belongs to.
      */
-    public function category()
-    {
+    public function category() {
         return $this->belongsTo('App\Models\Award\AwardCategory', 'award_category_id');
     }
 
     /**
      * Gets the awards progressions.
      */
-    public function progressions()
-    {
+    public function progressions() {
         return $this->hasMany('App\Models\Award\AwardProgression', 'award_id');
     }
 
     /**
      * Gets the awards rewards.
      */
-    public function rewards()
-    {
+    public function rewards() {
         return $this->hasMany('App\Models\Award\AwardReward', 'award_id');
     }
 
@@ -109,63 +101,66 @@ class Award extends Model
     /**
      * Scope a query to sort awards in alphabetical order.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  bool                                   $reverse
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param bool                                  $reverse
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeSortAlphabetical($query, $reverse = false)
-    {
+    public function scopeSortAlphabetical($query, $reverse = false) {
         return $query->orderBy('name', $reverse ? 'DESC' : 'ASC');
     }
 
     /**
      * Scope a query to sort awards in category order.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeSortCategory($query)
-    {
-        if(AwardCategory::all()->count()) return $query->orderBy(AwardCategory::select('sort')->whereColumn('awards.award_category_id', 'award_categories.id'), 'DESC');
+    public function scopeSortCategory($query) {
+        if (AwardCategory::all()->count()) {
+            return $query->orderBy(AwardCategory::select('sort')->whereColumn('awards.award_category_id', 'award_categories.id'), 'DESC');
+        }
+
         return $query;
     }
 
     /**
      * Scope a query to sort awards by newest first.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeSortNewest($query)
-    {
+    public function scopeSortNewest($query) {
         return $query->orderBy('id', 'DESC');
     }
 
     /**
      * Scope a query to sort features oldest first.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeSortOldest($query)
-    {
+    public function scopeSortOldest($query) {
         return $query->orderBy('id');
     }
 
     /**
      * Scope a query to show only released or "released" (at least one user-owned stack has ever existed) items.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeReleased($query)
-    {
+    public function scopeReleased($query) {
         $users = UserAward::pluck('award_id')->toArray();
         $characters = CharacterAward::pluck('award_id')->toArray();
         $array = array_merge($users, $characters);
+
         return $query->whereIn('id', $array)->orWhere('is_released', 1);
     }
-
 
     /**********************************************************************************************
 
@@ -178,8 +173,7 @@ class Award extends Model
      *
      * @return string
      */
-    public function getDisplayNameAttribute()
-    {
+    public function getDisplayNameAttribute() {
         return '<a href="'.$this->idUrl.'" class="display-award">'.$this->name.'</a>';
     }
 
@@ -188,8 +182,7 @@ class Award extends Model
      *
      * @return string
      */
-    public function getImageDirectoryAttribute()
-    {
+    public function getImageDirectoryAttribute() {
         return 'images/data/awards';
     }
 
@@ -198,9 +191,8 @@ class Award extends Model
      *
      * @return string
      */
-    public function getImageFileNameAttribute()
-    {
-        return $this->id . '-image.' . $this->extension;
+    public function getImageFileNameAttribute() {
+        return $this->id.'-image.'.$this->extension;
     }
 
     /**
@@ -208,8 +200,7 @@ class Award extends Model
      *
      * @return string
      */
-    public function getImagePathAttribute()
-    {
+    public function getImagePathAttribute() {
         return public_path($this->imageDirectory);
     }
 
@@ -218,10 +209,12 @@ class Award extends Model
      *
      * @return string
      */
-    public function getImageUrlAttribute()
-    {
-        if (!$this->has_image) return null;
-        return asset($this->imageDirectory . '/' . $this->imageFileName);
+    public function getImageUrlAttribute() {
+        if (!$this->has_image) {
+            return null;
+        }
+
+        return asset($this->imageDirectory.'/'.$this->imageFileName);
     }
 
     /**
@@ -229,8 +222,7 @@ class Award extends Model
      *
      * @return string
      */
-    public function getUrlAttribute()
-    {
+    public function getUrlAttribute() {
         return url('world/'.__('awards.awards').'?name='.$this->name);
     }
 
@@ -239,8 +231,7 @@ class Award extends Model
      *
      * @return string
      */
-    public function getIdUrlAttribute()
-    {
+    public function getIdUrlAttribute() {
         return url('world/'.__('awards.awards').'/'.$this->id);
     }
 
@@ -249,8 +240,7 @@ class Award extends Model
      *
      * @return string
      */
-    public function getAssetTypeAttribute()
-    {
+    public function getAssetTypeAttribute() {
         return 'awards';
     }
 
@@ -259,26 +249,29 @@ class Award extends Model
      *
      * @return array
      */
-    public function getDataAttribute()
-    {
-        if (!$this->id) return null;
+    public function getDataAttribute() {
+        if (!$this->id) {
+            return null;
+        }
+
         return json_decode($this->attributes['data'], true);
     }
 
-    public function getCreditsAttribute(){
+    public function getCreditsAttribute() {
         return $this->data['credits'];
     }
-    public function getPrettyCreditsAttribute(){
 
+    public function getPrettyCreditsAttribute() {
         $creds = [];
         $credits = [];
 
-        foreach($this->credits as $credit){
-            $text = isset($credit['name']) ? $credit['name'] :  (isset($credit['id']) ? User::find($credit['id'])->name : (isset($credit['url']) ? $credit['url'] : 'artist'));
-            $link = isset($credit['url']) ? $credit['url'] :  (isset($credit['id']) ? User::find($credit['id'])->url : '#');
+        foreach ($this->credits as $credit) {
+            $text = $credit['name'] ?? (isset($credit['id']) ? User::find($credit['id'])->name : ($credit['url'] ?? 'artist'));
+            $link = $credit['url'] ?? (isset($credit['id']) ? User::find($credit['id'])->url : '#');
             $role = isset($credit['role']) ? '<small>('.$credit['role'].')</small>' : null;
-            $credits[] = '<a href="'.$link.'" target="_blank">'.$text.'</a> '. $role;
+            $credits[] = '<a href="'.$link.'" target="_blank">'.$text.'</a> '.$role;
         }
+
         return $credits;
     }
 
@@ -287,9 +280,11 @@ class Award extends Model
      *
      * @return string
      */
-    public function getRarityAttribute()
-    {
-        if (!$this->data) return null;
+    public function getRarityAttribute() {
+        if (!$this->data) {
+            return null;
+        }
+
         return $this->data['rarity'];
     }
 
@@ -298,9 +293,11 @@ class Award extends Model
      *
      * @return string
      */
-    public function getSourceAttribute()
-    {
-        if (!$this->data) return null;
+    public function getSourceAttribute() {
+        if (!$this->data) {
+            return null;
+        }
+
         return $this->data['release'];
     }
 
@@ -309,10 +306,12 @@ class Award extends Model
      *
      * @return array
      */
-    public function getPromptsAttribute()
-    {
-        if (!$this->data) return null;
+    public function getPromptsAttribute() {
+        if (!$this->data) {
+            return null;
+        }
         $awardPrompts = $this->data['prompts'];
+
         return Prompt::whereIn('id', $awardPrompts)->get();
     }
 
@@ -323,24 +322,34 @@ class Award extends Model
     **********************************************************************************************/
 
     /**
-     * Check if user can claim this award
+     * Check if user can claim this award.
+     *
+     * @param mixed $user
      */
-    public function canClaim($user)
-    {
-        if($user->awards()->where('award_id', $this->id)->count() && !$this->allow_reclaim) return false;
+    public function canClaim($user) {
+        if ($user->awards()->where('award_id', $this->id)->count() && !$this->allow_reclaim) {
+            return false;
+        }
+
         return true;
     }
 
     /**
-     * Gets how many progressions are completed by a user
+     * Gets how many progressions are completed by a user.
+     *
+     * @param mixed|null $user
      */
-    public function progressionProgress($user = null)
-    {
-        if(!$user) return 0;
-        $progressionSum = 0;
-        foreach($this->progressions as $progression) {
-            if($progression->isUnlocked($user)) $progressionSum += 1;
+    public function progressionProgress($user = null) {
+        if (!$user) {
+            return 0;
         }
+        $progressionSum = 0;
+        foreach ($this->progressions as $progression) {
+            if ($progression->isUnlocked($user)) {
+                $progressionSum += 1;
+            }
+        }
+
         return $progressionSum;
     }
 }

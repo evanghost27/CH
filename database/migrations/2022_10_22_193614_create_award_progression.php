@@ -4,15 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAwardProgression extends Migration
-{
+class CreateAwardProgression extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('award_progressions', function (Blueprint $table) {
             $table->integer('award_id');
             $table->string('type');
@@ -23,11 +19,8 @@ class CreateAwardProgression extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('award_progressions');
     }
 }

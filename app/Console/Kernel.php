@@ -30,8 +30,7 @@ class Kernel extends ConsoleKernel {
         $schedule->command('update-staff-reward-actions')
             ->daily();
         $schedule->command('distribute-birthday-rewards')
-                ->monthly();
-
+            ->monthly();
     }
 
     /**

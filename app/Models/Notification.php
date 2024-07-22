@@ -157,17 +157,16 @@ class Notification extends Model {
     public const GALLERY_SUBMISSION_STAFF_COMMENTS = 513;
     public const GALLERY_SUBMISSION_EDITED = 514;
     public const GALLERY_SUBMISSION_PARTICIPANT = 515;
-   
-   
-    const AFFILIATE_ACCEPTION               = 105; // URI - Affiliates
-    const AFFILIATE_REJECTION               = 106; // URI - Affiliates
-    const AFFILIATE_PENDING                 = 107; // URI - Affiliates
 
-       const AWARD_GRANT                       = 341;
-    const AWARD_REMOVAL                     = 342;
-    const AWARD_TRANSFER                    = 343;
-    const FORCED_AWARD_TRANSFER             = 344;
-    const CHARACTER_AWARD_GRANT             = 345;
-    const CHARACTER_AWARD_REMOVAL           = 346;
-    const BIRTHDAY_REWARDED    = 1105;
+    public const AFFILIATE_ACCEPTION = 105; // URI - Affiliates
+    public const AFFILIATE_REJECTION = 106; // URI - Affiliates
+    public const AFFILIATE_PENDING = 107; // URI - Affiliates
+
+    public const AWARD_GRANT = 341;
+    public const AWARD_REMOVAL = 342;
+    public const AWARD_TRANSFER = 343;
+    public const FORCED_AWARD_TRANSFER = 344;
+    public const CHARACTER_AWARD_GRANT = 345;
+    public const CHARACTER_AWARD_REMOVAL = 346;
+    public const BIRTHDAY_REWARDED = 1105;
 }

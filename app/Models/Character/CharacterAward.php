@@ -5,8 +5,7 @@ namespace App\Models\Character;
 use App\Models\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CharacterAward extends Model
-{
+class CharacterAward extends Model {
     use SoftDeletes;
 
     /**
@@ -15,15 +14,8 @@ class CharacterAward extends Model
      * @var array
      */
     protected $fillable = [
-        'data', 'award_id', 'character_id'
+        'data', 'award_id', 'character_id',
     ];
-
-    /**
-     * Whether the model contains timestamps to be saved and updated.
-     *
-     * @var string
-     */
-    public $timestamps = true;
 
     /**
      * The table associated with the model.
@@ -32,8 +24,15 @@ class CharacterAward extends Model
      */
     protected $table = 'character_awards';
 
+    /**
+     * Whether the model contains timestamps to be saved and updated.
+     *
+     * @var string
+     */
+    public $timestamps = true;
+
     /**********************************************************************************************
-    
+
         RELATIONS
 
     **********************************************************************************************/
@@ -41,21 +40,19 @@ class CharacterAward extends Model
     /**
      * Get the character who owns the stack.
      */
-    public function character() 
-    {
+    public function character() {
         return $this->belongsTo('App\Models\Character\Character');
     }
 
     /**
      * Get the item associated with this item stack.
      */
-    public function award() 
-    {
+    public function award() {
         return $this->belongsTo('App\Models\Award\Award');
     }
 
     /**********************************************************************************************
-    
+
         ACCESSORS
 
     **********************************************************************************************/
@@ -65,19 +62,20 @@ class CharacterAward extends Model
      *
      * @return array
      */
-    public function getDataAttribute() 
-    {
+    public function getDataAttribute() {
         return json_decode($this->attributes['data'], true);
     }
-    
+
     /**
      * Checks if the stack is transferrable.
      *
      * @return array
      */
-    public function getIsTransferrableAttribute()
-    {
-        if(!isset($this->data['disallow_transfer']) && $this->award->allow_transfer) return true;
+    public function getIsTransferrableAttribute() {
+        if (!isset($this->data['disallow_transfer']) && $this->award->allow_transfer) {
+            return true;
+        }
+
         return false;
     }
 
@@ -86,9 +84,8 @@ class CharacterAward extends Model
      *
      * @return int
      */
-    public function getAvailableQuantityAttribute()
-    {
-        return ($this->count);
+    public function getAvailableQuantityAttribute() {
+        return $this->count;
     }
 
     /**
@@ -96,8 +93,7 @@ class CharacterAward extends Model
      *
      * @return string
      */
-    public function getAssetTypeAttribute()
-    {
+    public function getAssetTypeAttribute() {
         return 'character_awards';
     }
 }

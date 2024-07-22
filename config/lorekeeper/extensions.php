@@ -59,11 +59,11 @@ return [
         'expanded'          => 1,
         'default_recipient' => 0, // 0 to default to the character's owner (if a user), 1 to default to the submission user.
     ],
- // Awards - Uri
- 'awards' => [
-    'user_featured'             => 1,   // Number of awards displayed prominently on the user profile
-    'character_featured'        => 1,   // Number of awards displayed prominently on the character page
- ],
+    // Awards - Uri
+    'awards' => [
+        'user_featured'             => 1,   // Number of awards displayed prominently on the user profile
+        'character_featured'        => 1,   // Number of awards displayed prominently on the character page
+    ],
     // MYO Image Hide/Remove - Mercury
     // Adds an option when approving MYO submissions to hide or delete the MYO placeholder image
     'remove_myo_image'                     => 0,

@@ -2,28 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Auth;
-use Settings;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
-use App\Models\SitePage;
 use App\Models\Affiliate;
 use App\Services\AffiliateService;
+use Auth;
+use Illuminate\Http\Request;
+use Settings;
 
-class AffiliateController extends Controller
-{
-
+class AffiliateController extends Controller {
     /**
      * Shows the homepage.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getIndex()
-    {
+    public function getIndex() {
         return view('admin.affiliates.index', [
-            'open' => intval(Settings::get('affiliates_open')),
-            'affiliates' => Affiliate::where('status','Accepted')->get()->paginate(10),
+            'open'       => intval(Settings::get('affiliates_open')),
+            'affiliates' => Affiliate::where('status', 'Accepted')->get()->paginate(10),
         ]);
     }
 
@@ -32,20 +27,20 @@ class AffiliateController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getCreateAffiliate()
-    {
+    public function getCreateAffiliate() {
         return view('admin.affiliates.create_edit_affiliate', [
-            'affiliate' => new Affiliate
+            'affiliate' => new Affiliate,
         ]);
     }
 
     /**
      * Shows the homepage.
      *
+     * @param mixed $id
+     *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getEditAffiliate($id)
-    {
+    public function getEditAffiliate($id) {
         return view('admin.affiliates.create_edit_affiliate', [
             'affiliate' => Affiliate::find($id),
         ]);
@@ -54,57 +49,63 @@ class AffiliateController extends Controller
     /**
      * Shows the homepage.
      *
+     * @param mixed|null $id
+     *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function postCreateEditAffiliate(Request $request, AffiliateService $service, $id = null)
-    {
+    public function postCreateEditAffiliate(Request $request, AffiliateService $service, $id = null) {
         $id ? $request->validate(Affiliate::$updateRules) : $request->validate(Affiliate::$createRules);
         $affiliate = Affiliate::find($id);
 
-        $data = $request->only(['name','url','image_url','description','message','staff_comment', 'is_featured']);
+        $data = $request->only(['name', 'url', 'image_url', 'description', 'message', 'staff_comment', 'is_featured']);
 
-        if($id && $service->updateAffiliate(Affiliate::find($id), $data, Auth::user())) {
+        if ($id && $service->updateAffiliate(Affiliate::find($id), $data, Auth::user())) {
             flash('Affiliate updated successfully.')->success();
+
             return redirect()->to('admin/affiliates/edit/'.$id);
-        }
-        else if (!$id && $affiliate = $service->createAffiliate($data, Auth::user())) {
+        } elseif (!$id && $affiliate = $service->createAffiliate($data, Auth::user())) {
             flash('Affiliate created successfully.')->success();
+
             return redirect()->to('admin/affiliates/edit/'.$affiliate->id);
+        } else {
+            foreach ($service->errors()->getMessages()['error'] as $error) {
+                flash($error)->error();
+            }
         }
-        else {
-            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
-        }
+
         return redirect()->to('admin/affiliates');
     }
 
     /**
      * Shows the status of an affiliate request.
      *
+     * @param mixed $slug
+     *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getStatus($slug)
-    {
+    public function getStatus($slug) {
         $affiliate = Affiliate::where('slug', $slug)->first();
-        if(!$affiliate) abort(404);
+        if (!$affiliate) {
+            abort(404);
+        }
 
         return view('home.affiliates_check', [
-            'affiliate' => $affiliate
+            'affiliate' => $affiliate,
         ]);
     }
 
     /**
      * Shows the submission index page.
      *
-     * @param  string  $status
+     * @param string $status
+     *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getQueue(Request $request, $status = null)
-    {
+    public function getQueue(Request $request, $status = null) {
         $affiliates = Affiliate::where('status', $status ? ucfirst($status) : 'Pending');
         $data = $request->only(['sort']);
-        if(isset($data['sort']))
-        {
-            switch($data['sort']) {
+        if (isset($data['sort'])) {
+            switch ($data['sort']) {
                 case 'newest':
                     $affiliates->sortNewest();
                     break;
@@ -112,94 +113,100 @@ class AffiliateController extends Controller
                     $affiliates->sortOldest();
                     break;
             }
+        } else {
+            $affiliates->sortOldest();
         }
-        else $affiliates->sortOldest();
+
         return view('admin.affiliates.affiliates', [
-            'affiliates' => $affiliates->paginate(10)->appends($request->query())
+            'affiliates' => $affiliates->paginate(10)->appends($request->query()),
         ]);
     }
 
-
     /**
-     * Accepts or Rejects an affiliate request
+     * Accepts or Rejects an affiliate request.
+     *
+     * @param mixed $id
      */
-    public function getAcceptAffiliate($id)
-    {
+    public function getAcceptAffiliate($id) {
         $affiliate = Affiliate::find($id);
-        if(!$affiliate) abort(404);
+        if (!$affiliate) {
+            abort(404);
+        }
 
         return view('admin.affiliates._accept_modal', [
-            'affiliate' => $affiliate
+            'affiliate' => $affiliate,
         ]);
     }
 
-
     /**
-     * Accepts or Rejects an affiliate request
+     * Accepts or Rejects an affiliate request.
+     *
+     * @param mixed $id
      */
-    public function getRejectAffiliate($id)
-    {
-
+    public function getRejectAffiliate($id) {
         $affiliate = Affiliate::find($id);
-        if(!$affiliate) abort(404);
+        if (!$affiliate) {
+            abort(404);
+        }
 
         return view('admin.affiliates._reject_modal', [
-            'affiliate' => $affiliate
+            'affiliate' => $affiliate,
         ]);
     }
 
     /**
-     * Accepts or Rejects an affiliate request
+     * Accepts or Rejects an affiliate request.
+     *
+     * @param mixed $id
+     * @param mixed $action
      */
-    public function postAffiliate(Request $request, AffiliateService $service, $id, $action)
-    {
-        if($action == 'reject' && $service->rejectAffiliate($request->only(['staff_comment']) + ['id' => $id], Auth::user())) {
+    public function postAffiliate(Request $request, AffiliateService $service, $id, $action) {
+        if ($action == 'reject' && $service->rejectAffiliate($request->only(['staff_comment']) + ['id' => $id], Auth::user())) {
             flash('Affiliate rejected successfully.')->success();
-        }
-        elseif($action == 'accept' && $service->acceptAffiliate($request->only(['staff_comment','is_featured']) + ['id' => $id], Auth::user())) {
+        } elseif ($action == 'accept' && $service->acceptAffiliate($request->only(['staff_comment', 'is_featured']) + ['id' => $id], Auth::user())) {
             flash('Affiliate accepted successfully.')->success();
+        } else {
+            foreach ($service->errors()->getMessages()['error'] as $error) {
+                flash($error)->error();
+            }
         }
-        else {
-            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
-        }
+
         return redirect()->back();
     }
 
-
     /**
-     * Accepts or Deletes an affiliate request
+     * Accepts or Deletes an affiliate request.
+     *
+     * @param mixed $id
      */
-    public function getDeleteAffiliate($id)
-    {
+    public function getDeleteAffiliate($id) {
         $affiliate = Affiliate::find($id);
-        if(!$affiliate) abort(404);
+        if (!$affiliate) {
+            abort(404);
+        }
 
         return view('admin.affiliates._delete_modal', [
-            'affiliate' => $affiliate
+            'affiliate' => $affiliate,
         ]);
     }
 
     /**
      * Deletes an affiliate.
      *
-     * @param  \Illuminate\Http\Request             $request
-     * @param  App\Services\AffiliateService        $service
-     * @param  int                                  $id
+     * @param App\Services\AffiliateService $service
+     * @param int                           $id
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postDeleteAffiliate(Request $request, AffiliateService $service, $id)
-    {
-        if($id && $service->deleteAffiliate(Affiliate::find($id))) {
+    public function postDeleteAffiliate(Request $request, AffiliateService $service, $id) {
+        if ($id && $service->deleteAffiliate(Affiliate::find($id))) {
             flash('Affiliate deleted successfully.')->success();
+        } else {
+            foreach ($service->errors()->getMessages()['error'] as $error) {
+                flash($error)->error();
+            }
         }
-        else {
-            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
-        }
+
         return redirect()->to('admin/affiliates/current');
     }
-
-
-
-
-
 }

@@ -117,30 +117,6 @@ class FeatureService extends Service {
     }
 
     /**
-     * Handle category data.
-     *
-     * @param  array                                     $data
-     * @param  \App\Models\Feature\FeatureCategory|null  $category
-     * @return array
-     */
-    private function populateCategoryData($data, $category = null)
-    {
-        if(isset($data['description']) && $data['description']) $data['parsed_description'] = parse($data['description']);
-
-        if(isset($data['remove_image']))
-        {
-            if($category && $category->has_image && $data['remove_image'])
-            {
-                $data['has_image'] = 0;
-                $this->deleteImage($category->categoryImagePath, $category->categoryImageFileName);
-            }
-            unset($data['remove_image']);
-        }
-
-        return $data;
-    }
-
-    /**
      * Delete a category.
      *
      * @param \App\Models\Feature\FeatureCategory $category
@@ -199,7 +175,6 @@ class FeatureService extends Service {
 
         return $this->rollbackReturn(false);
     }
-
 
     /**********************************************************************************************
 
@@ -378,6 +353,30 @@ class FeatureService extends Service {
         }
 
         return $this->rollbackReturn(false);
+    }
+
+    /**
+     * Handle category data.
+     *
+     * @param array                                    $data
+     * @param \App\Models\Feature\FeatureCategory|null $category
+     *
+     * @return array
+     */
+    private function populateCategoryData($data, $category = null) {
+        if (isset($data['description']) && $data['description']) {
+            $data['parsed_description'] = parse($data['description']);
+        }
+
+        if (isset($data['remove_image'])) {
+            if ($category && $category->has_image && $data['remove_image']) {
+                $data['has_image'] = 0;
+                $this->deleteImage($category->categoryImagePath, $category->categoryImageFileName);
+            }
+            unset($data['remove_image']);
+        }
+
+        return $data;
     }
 
     /**

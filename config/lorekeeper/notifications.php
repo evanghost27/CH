@@ -321,27 +321,26 @@ return [
     // A user-submitted affiliate was accepted
     // AFFILIATE_ACCEPTION
     105 => [
-        'name' => 'Affiliate Request Accepted',
+        'name'    => 'Affiliate Request Accepted',
         'message' => 'The affiliate request for {affiliate_name} has been accepted by {admin_name}. (<a href="{url}/{affiliate_slug}">View Status</a>)',
-        'url' => 'affiliates/status/'
+        'url'     => 'affiliates/status/',
     ],
 
     // A user-submitted affiliate was rejected
     // AFFILIATE_REJECTION
     106 => [
-        'name' => 'Affiliate Request Rejected',
+        'name'    => 'Affiliate Request Rejected',
         'message' => 'The affiliate request for {affiliate_name} has been rejected by {admin_name}. (<a href="{url}/{affiliate_slug}">View Status</a>)',
-        'url' => 'affiliates/status/'
+        'url'     => 'affiliates/status/',
     ],
 
     // A user-submitted affiliate is now pending
     // AFFILIATE_PENDING
     107 => [
-        'name' => 'Affiliate Request Pending',
+        'name'    => 'Affiliate Request Pending',
         'message' => 'The affiliate request for {affiliate_name} is pending. (<a href="{url}/{affiliate_slug}">View Status</a>)',
-        'url' => 'affiliates/status/'
+        'url'     => 'affiliates/status/',
     ],
-
 
     // REPORT_ASSIGNED
     220 => [
@@ -374,44 +373,44 @@ return [
     ],
     // AWARD_GRANT
     341 => [
-        'name' => 'Award Grant',
+        'name'    => 'Award Grant',
         'message' => 'You have earned the following award(s): {award_name} (×{award_quantity}). Congratulations! (<a href="{url}">View Awards</a>)',
-        'url' => 'awardcase'
+        'url'     => 'awardcase',
     ],
 
     // AWARD_REMOVAL
     342 => [
-        'name' => 'Award Removal',
+        'name'    => 'Award Removal',
         'message' => '{award_name} (×{award_quantity}) was removed from your Awards by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Awards</a>)',
-        'url' => 'awardcase'
+        'url'     => 'awardcase',
     ],
 
     // AWARD_TRANSFER
     343 => [
-        'name' => 'Award Transfer',
+        'name'    => 'Award Transfer',
         'message' => 'You have received {award_name} (×{award_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Awards</a>)',
-        'url' => 'awardcase'
+        'url'     => 'awardcase',
     ],
 
     // FORCED_AWARD_TRANSFER
     344 => [
-        'name' => 'Forced Award Transfer',
+        'name'    => 'Forced Award Transfer',
         'message' => '{item_name} (×{item_quantity}) was removed from {character_name} by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Inventory</a>)',
-        'url' => 'character/{character_slug}/inventory'
+        'url'     => 'character/{character_slug}/inventory',
     ],
 
     // CHARACTER_AWARD_GRANT
     345 => [
-        'name' => 'Character Award Grant',
+        'name'    => 'Character Award Grant',
         'message' => '{character_name} has received a staff grant of {award_name} (×{award_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Awards</a>)',
-        'url' => 'character/{character_slug}/awards'
+        'url'     => 'character/{character_slug}/awards',
     ],
 
     // CHARACTER_AWARD_REMOVAL
     346 => [
-        'name' => 'Character Award Removal',
+        'name'    => 'Character Award Removal',
         'message' => '{award_name} (×{award_quantity}) was removed from {character_name} by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Awards</a>)',
-        'url' => 'character/{character_slug}/awards'
+        'url'     => 'character/{character_slug}/awards',
     ],
 
     // CHARACTER_ITEM_GRANT
@@ -505,10 +504,10 @@ return [
         'url'     => 'gallery/view/{submission_id}',
     ],
 
-        // BIRTHDAY_REWARDED
-        1105 => [
-            'name' => 'Happy Birthday to You',
-            'message' => 'It\'s your birthday this month, {user_name}! A gift has been left in your inventory. (<a href="{url}">View Inventory</a>)',
-            'url' => 'inventory'
-        ],
+    // BIRTHDAY_REWARDED
+    1105 => [
+        'name'    => 'Happy Birthday to You',
+        'message' => 'It\'s your birthday this month, {user_name}! A gift has been left in your inventory. (<a href="{url}">View Inventory</a>)',
+        'url'     => 'inventory',
+    ],
 ];

@@ -48,13 +48,13 @@ return [
         'links' => [
             [
                 'name' => 'Approved Affiliates',
-                'url' => 'admin/affiliates/current'
+                'url'  => 'admin/affiliates/current',
             ],
             [
                 'name' => 'Affiliate Requests',
-                'url' => 'admin/affiliates/pending'
+                'url'  => 'admin/affiliates/pending',
             ],
-        ]
+        ],
     ],
     'Site' => [
         'power' => 'edit_pages',
@@ -130,9 +130,9 @@ return [
             ],
             [
                 'name' => 'Award Grants',
-                'url' => 'admin/grants/awards'
+                'url'  => 'admin/grants/awards',
             ],
-        ]
+        ],
     ],
     'Masterlist' => [
         'power' => 'manage_characters',
@@ -172,11 +172,11 @@ return [
             ],
             [
                 'name' => 'Award Categories',
-                'url' => 'admin/data/award-categories'
+                'url'  => 'admin/data/award-categories',
             ],
             [
                 'name' => 'Awards',
-                'url' => 'admin/data/awards'
+                'url'  => 'admin/data/awards',
             ],
             [
                 'name' => 'Character Categories',
@@ -224,9 +224,9 @@ return [
             ],
             [
                 'name' => 'Advent Calendars',
-                'url' => 'admin/data/advent-calendars'
+                'url'  => 'admin/data/advent-calendars',
             ],
-        ]
+        ],
     ],
     'Raffles'    => [
         'power' => 'manage_raffles',

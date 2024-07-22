@@ -98,30 +98,6 @@ class SpeciesService extends Service {
     }
 
     /**
-     * Processes user input for creating/updating a species.
-     *
-     * @param  array                        $data
-     * @param  \App\Models\Species\Species  $species
-     * @return array
-     */
-    private function populateData($data, $species = null)
-    {
-        if(isset($data['description']) && $data['description']) $data['parsed_description'] = parse($data['description']);
-
-        if(isset($data['remove_image']))
-        {
-            if($species && $species->has_image && $data['remove_image'])
-            {
-                $data['has_image'] = 0;
-                $this->deleteImage($species->speciesImagePath, $species->speciesImageFileName);
-            }
-            unset($data['remove_image']);
-        }
-
-        return $data;
-    }
-
-    /**
      * Deletes a species.
      *
      * @param \App\Models\Species\Species $species
@@ -252,30 +228,6 @@ class SpeciesService extends Service {
     }
 
     /**
-     * Processes user input for creating/updating a subtype.
-     *
-     * @param  array                        $data
-     * @param  \App\Models\Species\Subtype  $subtype
-     * @return array
-     */
-    private function populateSubtypeData($data, $subtype = null)
-    {
-        if(isset($data['description']) && $data['description']) $data['parsed_description'] = parse($data['description']);
-
-        if(isset($data['remove_image']))
-        {
-            if($subtype && $subtype->has_image && $data['remove_image'])
-            {
-                $data['has_image'] = 0;
-                $this->deleteImage($subtype->subtypeImagePath, $subtype->subtypeImageFileName);
-            }
-            unset($data['remove_image']);
-        }
-
-        return $data;
-    }
-
-    /**
      * Deletes a subtype.
      *
      * @param \App\Models\Species\Subtype $subtype
@@ -328,6 +280,54 @@ class SpeciesService extends Service {
         }
 
         return $this->rollbackReturn(false);
+    }
+
+    /**
+     * Processes user input for creating/updating a species.
+     *
+     * @param array                       $data
+     * @param \App\Models\Species\Species $species
+     *
+     * @return array
+     */
+    private function populateData($data, $species = null) {
+        if (isset($data['description']) && $data['description']) {
+            $data['parsed_description'] = parse($data['description']);
+        }
+
+        if (isset($data['remove_image'])) {
+            if ($species && $species->has_image && $data['remove_image']) {
+                $data['has_image'] = 0;
+                $this->deleteImage($species->speciesImagePath, $species->speciesImageFileName);
+            }
+            unset($data['remove_image']);
+        }
+
+        return $data;
+    }
+
+    /**
+     * Processes user input for creating/updating a subtype.
+     *
+     * @param array                       $data
+     * @param \App\Models\Species\Subtype $subtype
+     *
+     * @return array
+     */
+    private function populateSubtypeData($data, $subtype = null) {
+        if (isset($data['description']) && $data['description']) {
+            $data['parsed_description'] = parse($data['description']);
+        }
+
+        if (isset($data['remove_image'])) {
+            if ($subtype && $subtype->has_image && $data['remove_image']) {
+                $data['has_image'] = 0;
+                $this->deleteImage($subtype->subtypeImagePath, $subtype->subtypeImageFileName);
+            }
+            unset($data['remove_image']);
+        }
+
+        return $data;
     }
 
     /**
