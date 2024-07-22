@@ -45,7 +45,7 @@
         </div>
     @endif
 
-<div class="text-center mt-4 small text-muted">{{ $subtypes->count() }} {{ trans_choice('lorekeeper.subtypes_', $subtypes->count()) }} found.</div>
+    <div class="text-center mt-4 small text-muted">{{ $subtypes->count() }} {{ trans_choice('lorekeeper.subtypes_', $subtypes->count()) }} found.</div>
 
 @endsection
 

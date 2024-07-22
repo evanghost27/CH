@@ -60,13 +60,11 @@
                     $cell.children('.character-items').addClass('show');
                     $cell.children('.character-items').removeClass('hide');
                     $cell.children('.character-items');
-                }
-                else if(val == 'Award') {
+                } else if (val == 'Award') {
                     $cell.children('.character-awards').addClass('show');
                     $cell.children('.character-awards').removeClass('hide');
                     $cell.children('.character-awards');
-                }
-                else if (val == 'Currency'){
+                } else if (val == 'Currency') {
                     $cell.children('.character-currencies').addClass('show');
                     $cell.children('.character-currencies').removeClass('hide');
                 } else if (val == 'LootTable') {

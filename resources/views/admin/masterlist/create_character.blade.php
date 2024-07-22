@@ -263,22 +263,40 @@
     <h3>Traits</h3>
 
     <div class="form-group">
-        {!! Form::label( ucfirst(__('lorekeeper.species'))) !!} @if($isMyo) {!! add_help('This will lock the slot into a particular '.__('lorekeeper.species').'. Leave it blank if you would like to give the user a choice.') !!} @endif
+        {!! Form::label(ucfirst(__('lorekeeper.species'))) !!} @if ($isMyo) {!! add_help('This will lock the slot into a particular ' . __('lorekeeper.species') . '. Leave it blank if you would like to give the user a choice.') !!} @endif
         {!! Form::select('species_id', $specieses, old('species_id'), ['class' => 'form-control', 'id' => 'species']) !!}
     </div>
 
     <div class="form-group" id="subtypes">
-        {!! Form::label(ucfirst(__('lorekeeper.subtype')).' (Optional)') !!} @if($isMyo) {!! add_help('This will lock the slot into a particular '.__('lorekeeper.subtype').'. Leave it blank if you would like to give the user a choice, or not select a '.__('lorekeeper.subtype').'. The '.__('lorekeeper.subtype').' must match the '.__('lorekeeper.species').' selected above, and if no '.__('lorekeeper.species').' is specified, the '.__('lorekeeper.subtype').' will not be applied.') !!} @endif
+        {!! Form::label(ucfirst(__('lorekeeper.subtype')) . ' (Optional)') !!} @if ($isMyo) {!! add_help(
+            'This will lock the slot into a particular ' .
+                __('lorekeeper.subtype') .
+                '. Leave it blank if you would like to give the user a choice, or not select a ' .
+                __('lorekeeper.subtype') .
+                '. The ' .
+                __('lorekeeper.subtype') .
+                ' must match the ' .
+                __('lorekeeper.species') .
+                ' selected above, and if no ' .
+                __('lorekeeper.species') .
+                ' is specified, the ' .
+                __('lorekeeper.subtype') .
+                ' will not be applied.',
+        ) !!} @endif
         {!! Form::select('subtype_id', $subtypes, old('subtype_id'), ['class' => 'form-control disabled', 'id' => 'subtype']) !!}
     </div>
 
     <div class="form-group">
-        {!! Form::label('Character Rarity') !!} @if($isMyo) {!! add_help('This will lock the slot into a particular rarity. Leave it blank if you would like to give the user more choices.') !!} @endif
+        {!! Form::label('Character Rarity') !!} @if ($isMyo) {!! add_help('This will lock the slot into a particular rarity. Leave it blank if you would like to give the user more choices.') !!} @endif
         {!! Form::select('rarity_id', $rarities, old('rarity_id'), ['class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">
-        {!! Form::label('Traits') !!} @if($isMyo) {!! add_help('These traits will be listed as required traits for the slot. The user will still be able to add on more traits, but not be able to remove these. This is allowed to conflict with the rarity above; you may add traits above the '.__('lorekeeper.character').'\'s specified rarity.') !!} @endif
+        {!! Form::label('Traits') !!} @if ($isMyo) {!! add_help(
+            'These traits will be listed as required traits for the slot. The user will still be able to add on more traits, but not be able to remove these. This is allowed to conflict with the rarity above; you may add traits above the ' .
+                __('lorekeeper.character') .
+                '\'s specified rarity.',
+        ) !!} @endif
         <div id="featureList">
         </div>
         <div><a href="#" class="btn btn-primary" id="add-feature">Add Trait</a></div>
@@ -293,8 +311,7 @@
         {!! Form::submit('Create Character', ['class' => 'btn btn-primary']) !!}
     </div>
     {!! Form::close() !!}
-@endif
-
+    @endif
 @endsection
 
 @section('scripts')

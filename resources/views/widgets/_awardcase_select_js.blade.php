@@ -15,25 +15,25 @@
         $('.awardcase-checkbox').on('change', function() {
             $checkbox = $(this);
             var rowId = "#awardRow" + $checkbox.val()
-            if($checkbox.is(":checked")) {
+            if ($checkbox.is(":checked")) {
                 $(rowId).addClass('category-selected');
                 $(rowId).find('.quantity-select').prop('name', 'stack_quantity[]')
-            }
-            else {
+            } else {
                 $(rowId).removeClass('category-selected');
                 $(rowId).find('.quantity-select').prop('name', '')
             }
         });
         $('#toggle-checks').on('click', function() {
-            ($(this).is(":checked")) ? selectVisible() : deselectVisible();
+            ($(this).is(":checked")) ? selectVisible(): deselectVisible();
         });
-        
+
         function refreshCategory() {
             var display = $userAwardCategory.val();
             $('.user-award').addClass('hide');
             $('.user-awards .category-' + display).removeClass('hide');
             $('#toggle-checks').prop('checked', false);
         }
+
         function selectVisible() {
             var $target = $('.user-award:not(.hide)');
             $target.addClass('category-selected');
@@ -41,6 +41,7 @@
             $('#toggle-checks').prop('checked', true);
             $target.find('.quantity-select').prop('name', 'stack_quantity[]');
         }
+
         function deselectVisible() {
             var $target = $('.user-award:not(.hide)');
             $target.removeClass('category-selected');

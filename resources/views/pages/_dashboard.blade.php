@@ -64,7 +64,7 @@
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><a href="{{ url(__('awards.awardcase')) }}">My {{ ucfirst(__('awards.awards')) }}</a></li>
-                <li class="list-group-item"><a href="{{ Auth::user()->url . '/'.__('awards.award').'-logs' }}">{{ ucfirst(__('awards.award')) }} Logs</a></li>
+                <li class="list-group-item"><a href="{{ Auth::user()->url . '/' . __('awards.award') . '-logs' }}">{{ ucfirst(__('awards.award')) }} Logs</a></li>
             </ul>
         </div>
     </div>

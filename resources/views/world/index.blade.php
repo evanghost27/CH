@@ -38,8 +38,8 @@
                 </ul>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><a href="{{ url('world/'.__('lorekeeper.specieses')) }}">{{ ucfirst(__('lorekeeper.specieses')) }}</a></li>
-				<li class="list-group-item"><a href="{{ url('world/'.__('lorekeeper.subtypes')) }}">{{ ucfirst(__('lorekeeper.subtypes')) }}</a></li>
+                <li class="list-group-item"><a href="{{ url('world/' . __('lorekeeper.specieses')) }}">{{ ucfirst(__('lorekeeper.specieses')) }}</a></li>
+                <li class="list-group-item"><a href="{{ url('world/' . __('lorekeeper.subtypes')) }}">{{ ucfirst(__('lorekeeper.subtypes')) }}</a></li>
                 <li class="list-group-item"><a href="{{ url('world/rarities') }}">Rarities</a></li>
                 <li class="list-group-item"><a href="{{ url('world/trait-categories') }}">Trait Categories</a></li>
                 <li class="list-group-item"><a href="{{ url('world/traits') }}">All Traits</a></li>
@@ -56,12 +56,11 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><a href="{{ url('world/item-categories') }}">Item Categories</a></li>
                 <li class="list-group-item"><a href="{{ url('world/items') }}">All Items</a></li>
-                <li class="list-group-item"><a href="{{ url('world/'.__('awards.award').'-categories') }}">{{ ucfirst(__('awards.award')) }} Categories</a></li>
-                <li class="list-group-item"><a href="{{ url('world/'.__('awards.awards')) }}">All {{ ucfirst(__('awards.awards')) }}</a></li>
+                <li class="list-group-item"><a href="{{ url('world/' . __('awards.award') . '-categories') }}">{{ ucfirst(__('awards.award')) }} Categories</a></li>
+                <li class="list-group-item"><a href="{{ url('world/' . __('awards.awards')) }}">All {{ ucfirst(__('awards.awards')) }}</a></li>
                 <li class="list-group-item"><a href="{{ url('world/currencies') }}">Currencies</a></li>
             </ul>
         </div>
     </div>
-</div>
-
+    </div>
 @endsection
