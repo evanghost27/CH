@@ -8,12 +8,8 @@
 
                 <div class="{{ config('lorekeeper.extensions.collapsible_admin_sidebar') ? 'collapse' : '' }} collapse-{!! $key !!}" id="collapse-{!! $key !!}">
                     {{-- order by name --}}
-                    @php
-                        usort($section['links'], function ($a, $b) {
-                            return strcmp($a['name'], $b['name']);
-                        });
-                    @endphp
-                    @foreach ($section['links'] as $item)
+                  
+                    @foreach ($section['link'] as $item)
                         <div class="sidebar-item">
                             <a href="{{ url($item['url']) }}" class="collapse-link {{ set_active($item['url'] . '*') }}">{{ $item['name'] }}</a>
                         </div>
