@@ -36,7 +36,7 @@ return [
     | site wherever the name needs to be displayed.
     |
     */
-    'site_name'                                         => 'Lorekeeper',
+    'site_name'                                         => 'Crithit',
 
     /*
     |--------------------------------------------------------------------------
@@ -160,7 +160,7 @@ return [
     'masterlist_image_dimension_target'                 => 'shorter',
 
     'masterlist_image_format'                           => null,
-    'masterlist_image_background'                       => '#ffffff',
+    'masterlist_image_background'                       => '#00ffffff',
 
     /*
     |--------------------------------------------------------------------------
