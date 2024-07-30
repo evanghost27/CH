@@ -28,21 +28,12 @@ class GalleryService extends Service {
         DB::beginTransaction();
 
         try {
-            if (!isset($data['submissions_open'])) {
-                $data['submissions_open'] = 0;
-            }
-            if (!isset($data['currency_enabled'])) {
-                $data['currency_enabled'] = 0;
-            }
-            if (!isset($data['votes_required'])) {
-                $data['votes_required'] = 0;
-            }
-            if (!isset($data['hide_before_start'])) {
-                $data['hide_before_start'] = 0;
-            }
-            if (!isset($data['prompt_selection'])) {
-                $data['prompt_selection'] = 0;
-            }
+            if(!isset($data['submissions_open'])) $data['submissions_open'] = 0;
+            if(!isset($data['currency_enabled'])) $data['currency_enabled'] = 0;
+            if(!isset($data['votes_required'])) $data['votes_required'] = 0;
+            if(!isset($data['hide_before_start'])) $data['hide_before_start'] = 0;
+            if(!isset($data['prompt_selection'])) $data['prompt_selection'] = 0;
+            if(!isset($data['location_selection'])) $data['location_selection'] = 0;
 
             $gallery = Gallery::create($data);
 
@@ -76,25 +67,12 @@ class GalleryService extends Service {
                 throw new \Exception('The name has already been taken.');
             }
 
-            if (!isset($data['submissions_open'])) {
-                $data['submissions_open'] = 0;
-            }
-            if (!isset($data['currency_enabled'])) {
-                $data['currency_enabled'] = 0;
-            }
-            if (!isset($data['votes_required'])) {
-                $data['votes_required'] = 0;
-            }
-            if (!isset($data['hide_before_start'])) {
-                $data['hide_before_start'] = 0;
-            }
-            if (!isset($data['prompt_selection'])) {
-                $data['prompt_selection'] = 0;
-            }
-
-            if (!$this->logAdminAction($user, 'Updated Gallery', 'Updated '.$gallery->displayName)) {
-                throw new \Exception('Failed to log admin action.');
-            }
+            if(!isset($data['submissions_open'])) $data['submissions_open'] = 0;
+            if(!isset($data['currency_enabled'])) $data['currency_enabled'] = 0;
+            if(!isset($data['votes_required'])) $data['votes_required'] = 0;
+            if(!isset($data['hide_before_start'])) $data['hide_before_start'] = 0;
+            if(!isset($data['prompt_selection'])) $data['prompt_selection'] = 0;
+            if(!isset($data['location_selection'])) $data['location_selection'] = 0;
 
             $gallery->update($data);
 

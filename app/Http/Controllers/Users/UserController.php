@@ -8,19 +8,29 @@ use App\Models\Award\AwardCategory;
 use App\Models\Character\Character;
 use App\Models\Character\CharacterImage;
 use App\Models\Character\Sublist;
+use Illuminate\Http\Request;
+
+use DB;
+use Auth;
+use Route;
+use Settings;
+
+use App\Models\User\User;
+
+use App\Models\User\UserCurrency;
 use App\Models\Currency\Currency;
 use App\Models\Gallery\Gallery;
 use App\Models\Gallery\GalleryCharacter;
 use App\Models\Gallery\GallerySubmission;
 use App\Models\Item\Item;
 use App\Models\Item\ItemCategory;
-use App\Models\User\User;
-use App\Models\User\UserCurrency;
+
+
 use App\Models\User\UserUpdateLog;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
+
 use Illuminate\Support\Facades\View;
-use Route;
+
 
 class UserController extends Controller {
     /*
@@ -78,7 +88,8 @@ class UserController extends Controller {
             'awards'     => $this->user->awards()->orderBy('user_awards.updated_at', 'DESC')->whereNull('deleted_at')->where('count', '>', 0)->take(4)->get(),
             'sublists'   => Sublist::orderBy('sort', 'DESC')->get(),
             'characters' => $characters,
-            'aliases'    => $aliases->orderBy('is_primary_alias', 'DESC')->orderBy('site')->get(),
+            'user_enabled' => Settings::get('WE_user_locations'),
+            'user_factions_enabled' => Settings::get('WE_user_factions')
         ]);
     }
 
@@ -223,7 +234,6 @@ class UserController extends Controller {
             'categories'  => $categories->keyBy('id'),
             'items'       => $items,
             'userOptions' => User::where('id', '!=', $this->user->id)->orderBy('name')->pluck('name', 'id')->toArray(),
-            'user'        => $this->user,
             'logs'        => $this->user->getItemLogs(),
         ]);
     }
@@ -257,7 +267,6 @@ class UserController extends Controller {
             'categories'  => $categories->keyBy('id'),
             'awards'      => $awards,
             'userOptions' => User::where('id', '!=', $this->user->id)->orderBy('name')->pluck('name', 'id')->toArray(),
-            'user'        => $this->user,
             'logs'        => $this->user->getAwardLogs(),
             'sublists'    => Sublist::orderBy('sort', 'DESC')->get(),
         ]);

@@ -49,7 +49,7 @@ return [
     ],
 
     // Group Traits By Category - Uri
-    'traits_by_category'                   => 0,
+    'traits_by_category'                   => 1,
 
     // Scroll To Top - Uri
     'scroll_to_top'                        => 1, // 1 - On, 0 - off
@@ -102,7 +102,7 @@ return [
     ],
 
     // collapsible admin sidebar - Newt
-    'collapsible_admin_sidebar' => 1,
+    'collapsible_admin_sidebar' => 0,
 
     // use gravatar for user avatars - Newt
     'use_gravatar' => 0,

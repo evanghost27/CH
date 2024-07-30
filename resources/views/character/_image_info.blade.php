@@ -50,6 +50,18 @@
                         <div class="col-lg-8 col-md-6 col-8">{!! $image->subtype_id ? $image->subtype->displayName : 'None' !!}</div>
                     </div>
                 @endif
+                @if($image->character->homeSetting)
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-4"><h5>Home</h5></div>
+                        <div class="col-lg-8 col-md-6 col-8">{!! $image->character->location ? $image->character->location : 'None' !!}</div>
+                    </div>
+                @endif
+                @if($image->character->factionSetting)
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-4"><h5>Faction</h5></div>
+                        <div class="col-lg-8 col-md-6 col-8">{!! $image->character->faction ? $image->character->currentFaction : 'None' !!}{!! $character->factionRank ? ' ('.$character->factionRank->name.')' : null !!}</div>
+                    </div>
+                @endif
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-4">
                         <h5>Rarity</h5>

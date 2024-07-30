@@ -191,3 +191,50 @@ Route::group(['prefix' => 'affiliates'], function () {
     Route::get('status/{slug}', 'AffiliateController@getStatus')->name('affiliate_status');
     Route::post('apply', 'AffiliateController@postApply')->name('post_apply_affiliate');
 });
+/**************************************************************************************************
+    World Expansion
+**************************************************************************************************/
+
+Route::group(['prefix' => 'world', 'namespace' => 'WorldExpansion'], function() {
+
+    Route::get('info', 'WorldExpansionController@getIndex');
+    Route::get('glossary', 'WorldExpansionController@getGlossary');
+    
+    Route::get('locations', 'LocationController@getLocations');
+    Route::get('locations/{id}', 'LocationController@getLocation');
+    Route::get('locations/{id}/submissions', 'LocationController@getLocationSubmissions');
+    Route::get('location-types', 'LocationController@getLocationTypes');
+    Route::get('location-types/{id}', 'LocationController@getLocationType');
+
+    Route::get('faunas', 'NatureController@getFaunas');
+    Route::get('faunas/{id}', 'NatureController@getFauna');
+    Route::get('fauna-categories', 'NatureController@getFaunaCategories');
+    Route::get('fauna-categories/{id}', 'NatureController@getFaunaCategory');
+
+    Route::get('floras', 'NatureController@getFloras');
+    Route::get('floras/{id}', 'NatureController@getFlora');
+    Route::get('flora-categories', 'NatureController@getFloraCategories');
+    Route::get('flora-categories/{id}', 'NatureController@getFloraCategory');
+
+    Route::get('events', 'EventController@getEvents');
+    Route::get('events/{id}', 'EventController@getEvent');
+    Route::get('event-categories', 'EventController@getEventCategories');
+    Route::get('event-categories/{id}', 'EventController@getEventCategory');
+
+    Route::get('figures', 'FigureController@getFigures');
+    Route::get('figures/{id}', 'FigureController@getFigure');
+    Route::get('figure-categories', 'FigureController@getFigureCategories');
+    Route::get('figure-categories/{id}', 'FigureController@getFigureCategory');
+
+    Route::get('factions', 'FactionController@getFactions');
+    Route::get('factions/{id}', 'FactionController@getFaction');
+    Route::get('faction-types', 'FactionController@getFactionTypes');
+    Route::get('faction-types/{id}', 'FactionController@getFactionType');
+    Route::get('factions/{id}/members', 'FactionController@getFactionMembers');
+
+    Route::get('concepts', 'ConceptController@getConcepts');
+    Route::get('concepts/{id}', 'ConceptController@getConcept');
+    Route::get('concept-categories', 'ConceptController@getConceptCategories');
+    Route::get('concept-categories/{id}', 'ConceptController@getConceptCategory');
+});
+

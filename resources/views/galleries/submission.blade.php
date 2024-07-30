@@ -110,6 +110,9 @@
                                 @if ($submission->prompt_id)
                                     <strong>for</strong> {!! $submission->prompt->displayName !!}
                                 @endif
+                                @if($submission->location_id && ($submission->location->is_active || (Auth::check() && Auth::user()->isStaff)))
+                                ・ <strong>Location:</strong> {!! $submission->location->fullDisplayNameUC !!}
+                            @endif
                                 @if ($submission->favorites->count())
                                     ・ <a class="view-favorites" href="#">View Favorites</a>
                                 @endif

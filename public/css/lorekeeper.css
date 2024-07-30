@@ -19,17 +19,23 @@
 
 **************************************************************************************************/
 
-h1, h2, h3, h4, h5,
-.h1, .h2, .h3, .h4, .h5 {
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
     text-transform: uppercase;
     font-family: Roboto Condensed, serif;
     font-weight: bold;
+}
+
+h6,
+.h6 {
+    text-transform: unset;
 }
 
 h1 a, h2 a, h3 a, h4 a, h5 a,
 a.h1, a.h2, a.h3, a.h4, a.h5 {
     color: rgba(0,0,0,0.7);
 }
+
 h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover,
 a.h1:hover, a.h2:hover, a.h3:hover, a.h4:hover, a.h5:hover {
     color: inherit;
@@ -718,6 +724,11 @@ tr.accountbound {
 
 .bookmark-table .img-thumbnail {
     width: 100px;
+}
+
+
+@media (min-width: 768px) {
+    .fb-md-50 { flex-basis:50%; }
 }
 
 /* BOOTSTRAP TABLES *************************************************************************************/

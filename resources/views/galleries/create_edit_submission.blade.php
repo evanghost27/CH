@@ -93,7 +93,16 @@
                     {!! $submission->prompt_id ? '<p><strong>Prompt:</strong> ' . $submission->prompt->displayName . '</p>' : '' !!}
                 @endif
 
-                @if ($submission->id && Auth::user()->hasPower('manage_submissions'))
+                @if($gallery->location_selection == 1 && (!$submission->id || Auth::user()->hasPower('manage_submissions')))
+                    <div class="form-group">
+                        {!! Form::label('location_id', ($submission->id && Auth::user()->hasPower('manage_submissions') ? '[Admin] ' : '').'Location (Optional)') !!} {!! add_help('This <strong>does not</strong> automatically submit to the selected location, and you will need to submit to it separately. The location selected here will be displayed on the submission page for future reference. You will not be able to edit this after creating the submission.') !!}
+                        {!! Form::select('location_id', $locations, $submission->location_id, ['class' => 'form-control selectize', 'id' => 'location', 'placeholder' => 'Select a Location']) !!}
+                    </div>
+                @else
+                    {!! $submission->location_id ? '<p><strong>Location:</strong> '.$submission->location->displayName.'</p>' : '' !!}
+                @endif
+
+                @if($submission->id && Auth::user()->hasPower('manage_submissions'))
                     <div class="form-group">
                         {!! Form::label('gallery_id', '[Admin] Gallery / Move Submission') !!} {!! add_help(
                             'Use in the event you need to move a submission between galleries. If left blank, leaves the submission in its current location. Note that if currency rewards from submissions are enabled, this won\'t retroactively fill out the form if moved from a gallery where they are disabled to one where they are enabled.',
@@ -109,7 +118,7 @@
                 <h3>Characters</h3>
                 <p>
                     Add the characters included in this piece.
-                    @if (Settings::get('gallery_submissions_reward_currency'))
+                    @if(Settings::get('gallery_submissions_reward_currency'))
                         This helps the staff processing your submission award {!! $currency->displayName !!} for it, so be sure to add every character.
                     @endif
                 </p>
