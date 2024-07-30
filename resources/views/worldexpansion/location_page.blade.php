@@ -43,15 +43,15 @@
                     <h5 class="mb-0">Contains the following</h5>
 
                     <!-- <hr>
-            <p class="mb-0">
-                @foreach ($location->children as $key => $child)
+                <p class="mb-0">
+                    @foreach ($location->children as $key => $child)
     @if ($child->thumb_extension)
     <a href="{{ $child->url }}" data-toggle="tooltip" title="{{ $child->name }}"/><img src="{{ $child->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
 @else
     {!! $child->displayName !!}
     @endif
     @endforeach
-            </p> -->
+                </p> -->
 
                     <hr>
                     @foreach ($location->children->groupBy('type_id') as $group => $children)
