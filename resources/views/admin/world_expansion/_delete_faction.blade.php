@@ -1,5 +1,5 @@
-@if($faction)
-    {!! Form::open(['url' => 'admin/world/factions/delete/'.$faction->id]) !!}
+@if ($faction)
+    {!! Form::open(['url' => 'admin/world/factions/delete/' . $faction->id]) !!}
 
     <p>
         You are about to delete the <strong>{!! $faction->style !!}</strong>? This is not reversible.

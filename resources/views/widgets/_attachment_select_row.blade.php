@@ -2,16 +2,16 @@
     // This file represents a common source and definition for assets used in attachment_select
     // While it is not per se as tidy as defining these in the controller(s),
     // doing so this way enables better compatibility across disparate extensions
-    $items               = \App\Models\Item\Item::orderBy('name')->pluck('name', 'id');
-    $newses              = \App\Models\News::orderBy('title')->pluck('title', 'id');
-    $prompts             = \App\Models\Prompt\Prompt::orderBy('name')->pluck('name', 'id');
-    $locations           = \App\Models\WorldExpansion\Location::getLocationsByType();
-    $figures             = \App\Models\WorldExpansion\Figure::getFiguresByCategory();
-    $faunas              = \App\Models\WorldExpansion\Fauna::getFaunasByCategory();
-    $floras              = \App\Models\WorldExpansion\Flora::getFlorasByCategory();
-    $concepts            = \App\Models\WorldExpansion\Concept::getConceptsByCategory();
-    $factions            = \App\Models\WorldExpansion\Faction::getFactionsByType();
-    $events              = \App\Models\WorldExpansion\Event::getEventsByCategory();
+    $items = \App\Models\Item\Item::orderBy('name')->pluck('name', 'id');
+    $newses = \App\Models\News::orderBy('title')->pluck('title', 'id');
+    $prompts = \App\Models\Prompt\Prompt::orderBy('name')->pluck('name', 'id');
+    $locations = \App\Models\WorldExpansion\Location::getLocationsByType();
+    $figures = \App\Models\WorldExpansion\Figure::getFiguresByCategory();
+    $faunas = \App\Models\WorldExpansion\Fauna::getFaunasByCategory();
+    $floras = \App\Models\WorldExpansion\Flora::getFlorasByCategory();
+    $concepts = \App\Models\WorldExpansion\Concept::getConceptsByCategory();
+    $factions = \App\Models\WorldExpansion\Faction::getFactionsByType();
+    $events = \App\Models\WorldExpansion\Event::getEventsByCategory();
 @endphp
 
 
@@ -20,11 +20,23 @@
         <div id="attachmentRow" class="row px-0">
             <div class="attachment-row col-12 row py-1 logs-table-row">
                 <div class="col-6 col-md-4">
-                    {!! Form::select('attachment_type[]', [
-                    'Item'      => 'Item',      'Prompt'    => 'Prompt',    'News'      => 'News',
-                    'Figure'    => 'Figure',    'Fauna'     => 'Fauna',     'Flora'     => 'Flora',
-                    'Faction'   => 'Faction',   'Concept'   => 'Concept',   'Location'  => 'Location',  'Event' => 'Event'
-                ], null, ['class' => 'form-control attachment-type', 'placeholder' => 'Select Attachment Type']) !!}
+                    {!! Form::select(
+                        'attachment_type[]',
+                        [
+                            'Item' => 'Item',
+                            'Prompt' => 'Prompt',
+                            'News' => 'News',
+                            'Figure' => 'Figure',
+                            'Fauna' => 'Fauna',
+                            'Flora' => 'Flora',
+                            'Faction' => 'Faction',
+                            'Concept' => 'Concept',
+                            'Location' => 'Location',
+                            'Event' => 'Event',
+                        ],
+                        null,
+                        ['class' => 'form-control attachment-type', 'placeholder' => 'Select Attachment Type'],
+                    ) !!}
                 </div>
                 <div class="col-6 col-md-3 attachment-row-select"></div>
                 <div class="col-6 col-md-3">{!! Form::text('attachment_data[]', null, ['class' => 'form-control']) !!}</div>

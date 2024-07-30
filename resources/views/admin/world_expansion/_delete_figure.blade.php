@@ -1,5 +1,5 @@
-@if($figure)
-    {!! Form::open(['url' => 'admin/world/figures/delete/'.$figure->id]) !!}
+@if ($figure)
+    {!! Form::open(['url' => 'admin/world/figures/delete/' . $figure->id]) !!}
 
     <p>
         You are about to delete <strong>{!! $figure->name !!}</strong>? This is not reversible.

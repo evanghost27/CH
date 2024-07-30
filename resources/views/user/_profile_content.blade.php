@@ -56,18 +56,22 @@
                     <div class="col-md-9 col-8">{!! $user->birthdayDisplay !!}</div>
                 </div>
             @endif
-            @if($user_enabled && isset($user->home_id))
-            <div class="row col-md-6">
-                <div class="col-md-4 col-4"><h5>Home</h5></div>
-                <div class="col-md-8 col-8">{!! $user->home ? $user->home->fullDisplayName : '-Deleted Location-' !!}</div>
-            </div>
-        @endif
-        @if($user_factions_enabled && isset($user->faction_id))
-            <div class="row col-md-6">
-                <div class="col-md-4 col-4"><h5>Faction</h5></div>
-                <div class="col-md-8 col-8">{!! $user->faction ? $user->faction->fullDisplayName : '-Deleted Faction-' !!}{!! $user->factionRank ? ' ('.$user->factionRank->name.')' : null !!}</div>
-            </div>
-        @endif
+            @if ($user_enabled && isset($user->home_id))
+                <div class="row col-md-6">
+                    <div class="col-md-4 col-4">
+                        <h5>Home</h5>
+                    </div>
+                    <div class="col-md-8 col-8">{!! $user->home ? $user->home->fullDisplayName : '-Deleted Location-' !!}</div>
+                </div>
+            @endif
+            @if ($user_factions_enabled && isset($user->faction_id))
+                <div class="row col-md-6">
+                    <div class="col-md-4 col-4">
+                        <h5>Faction</h5>
+                    </div>
+                    <div class="col-md-8 col-8">{!! $user->faction ? $user->faction->fullDisplayName : '-Deleted Faction-' !!}{!! $user->factionRank ? ' (' . $user->factionRank->name . ')' : null !!}</div>
+                </div>
+            @endif
         </div>
     </div>
 </div>

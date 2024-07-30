@@ -1,5 +1,5 @@
-@if($fauna)
-    {!! Form::open(['url' => 'admin/world/faunas/delete/'.$fauna->id]) !!}
+@if ($fauna)
+    {!! Form::open(['url' => 'admin/world/faunas/delete/' . $fauna->id]) !!}
 
     <p>
         You are about to delete <strong>{!! $fauna->name !!}</strong>? This is not reversible.
@@ -12,6 +12,6 @@
     </div>
 
     {!! Form::close() !!}
-@else 
+@else
     Invalid fauna selected.
 @endif

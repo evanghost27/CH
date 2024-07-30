@@ -1,5 +1,5 @@
-@if($location)
-    {!! Form::open(['url' => 'admin/world/locations/delete/'.$location->id]) !!}
+@if ($location)
+    {!! Form::open(['url' => 'admin/world/locations/delete/' . $location->id]) !!}
 
     <p>
         You are about to delete the <strong>{!! $location->style !!}</strong>? This is not reversible.
@@ -12,6 +12,6 @@
     </div>
 
     {!! Form::close() !!}
-@else 
+@else
     Invalid location selected.
 @endif
