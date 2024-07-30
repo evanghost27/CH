@@ -1,5 +1,5 @@
-@if($term)
-    {!! Form::open(['url' => 'admin/world/glossary/delete/'.$term->id]) !!}
+@if ($term)
+    {!! Form::open(['url' => 'admin/world/glossary/delete/' . $term->id]) !!}
 
     <p>
         You are about to delete <strong>{!! $term->name !!}</strong>? This is not reversible.
@@ -12,6 +12,6 @@
     </div>
 
     {!! Form::close() !!}
-@else 
+@else
     Invalid event selected.
 @endif

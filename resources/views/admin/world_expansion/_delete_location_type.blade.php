@@ -1,5 +1,5 @@
-@if($type)
-    {!! Form::open(['url' => 'admin/world/location-types/delete/'.$type->id]) !!}
+@if ($type)
+    {!! Form::open(['url' => 'admin/world/location-types/delete/' . $type->id]) !!}
 
     <p>
         You are about to delete the location type <strong>{{ $type->name }}</strong>. This is not reversible.
@@ -9,10 +9,17 @@
         If you would like to hide the type from users, you can set it as inactive from the location type settings page.
     </p>
 
-    @if(count($type->locations))
+    @if (count($type->locations))
         <div class="alert alert-danger">
             <h5>If you delete this, you will also delete: </h5>
-            @foreach($type->locations as $key => $location) <strong>{!! $location->displayName !!}</strong>@if($key != count($type->locations)-1 && count($type->locations)>2),@endif @if($key == count($type->locations)-2) and @endif @endforeach.
+            @foreach ($type->locations as $key => $location)
+                <strong>{!! $location->displayName !!}</strong>
+                @if ($key != count($type->locations) - 1 && count($type->locations) > 2)
+                    ,
+                    @endif @if ($key == count($type->locations) - 2)
+                        and
+                    @endif
+                @endforeach.
         </div>
     @endif
 
@@ -23,6 +30,6 @@
     </div>
 
     {!! Form::close() !!}
-@else 
+@else
     Invalid location type selected.
 @endif
