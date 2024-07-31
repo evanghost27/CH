@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url'             => env('APP_URL', 'http://land-oc-crithit.com'),
+    'url'             => env('APP_URL', 'http://land-of-crithit.com'),
 
     'asset_url'       => env('ASSET_URL', null),
 
