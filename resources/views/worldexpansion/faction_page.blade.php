@@ -43,15 +43,15 @@
                     <h5 class="mb-0">Contains the following</h5>
 
                     <!-- <hr>
-            <p class="mb-0">
-                @foreach ($faction->children as $key => $child)
+                <p class="mb-0">
+                    @foreach ($faction->children as $key => $child)
     @if ($child->thumb_extension)
     <a href="{{ $child->url }}" data-toggle="tooltip" title="{{ $child->name }}"/><img src="{{ $child->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
 @else
     {!! $child->displayName !!}
     @endif
     @endforeach
-            </p> -->
+                </p> -->
 
                     <hr>
                     @foreach ($faction->children->groupBy('type_id') as $group => $children)
@@ -78,15 +78,15 @@
                     <h5 class="mb-0">Member Figure{{ count($faction->members) == 1 ? '' : 's' }}</h5>
 
                     <!-- <hr>
-            <p class="mb-0">
-                @foreach ($faction->members as $key => $member)
+                <p class="mb-0">
+                    @foreach ($faction->members as $key => $member)
     @if ($member->thumb_extension)
     <a href="{{ $member->url }}" data-toggle="tooltip" title="{{ $member->name }}"/><img src="{{ $member->thumbUrl }}" class="m-1" style="max-width:100px"/> </a>
 @else
     {!! $member->displayName !!}
     @endif
     @endforeach
-            </p> -->
+                </p> -->
 
                     <hr>
                     @foreach ($faction->members->groupBy('category_id') as $key => $members)
