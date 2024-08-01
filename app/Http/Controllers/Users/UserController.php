@@ -11,7 +11,7 @@ use App\Models\Character\Sublist;
 use Illuminate\Http\Request;
 
 use DB;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Route;
 use Settings;
 
