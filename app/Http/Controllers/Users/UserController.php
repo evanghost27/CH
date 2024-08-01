@@ -16,7 +16,7 @@ use Route;
 use Settings;
 
 use App\Models\User\User;
-
+use App\Models\Currency\CurrencyLog;
 use App\Models\User\UserCurrency;
 use App\Models\Currency\Currency;
 use App\Models\Gallery\Gallery;
@@ -49,10 +49,7 @@ class UserController extends Controller {
         parent::__construct();
         $name = Route::current()->parameter('name');
         $this->user = User::where('name', $name)->first();
-        // check previous usernames (only grab the latest change)
-        if (!$this->user) {
-            $this->user = UserUpdateLog::whereIn('type', ['Username Changed', 'Name/Rank Change'])->where('data', 'like', '%"old_name":"'.$name.'"%')->orderBy('id', 'DESC')->first()->user ?? null;
-        }
+        // check previous usernames (only grab the latest change
         if (!$this->user) {
             abort(404);
         }
